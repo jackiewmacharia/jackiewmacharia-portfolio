@@ -1,0 +1,10 @@
+[[headers]]
+  for = "/*.woff"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Content-Type = "application/font-woff"
+
+[[redirects]]
+  from = "https://wangoimacharia.netlify.com/*"
+  to = "https:/www.wangoimacharia.dev/:splat"
+  force = true
