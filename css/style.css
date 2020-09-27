@@ -543,6 +543,48 @@ body.light hr.separator {
   line-height: 32px;
 }
 
+footer {
+  font-size: 14px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  color: #fff;
+  bottom: 0;
+  width: 100vw;
+}
+
+footer a, footer a:visited { color: #fff; }
+
+footer a:hover, footer a:focus { color: #FEB653; }
+
+/* copyright */
+footer .copyright {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+footer .copyright li {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  line-height: 24px;
+}
+
+.ie footer .copyright li {
+  display: inline;
+}
+
+footer .copyright li:before {
+  content: "\2022";
+  padding-left: 6px;
+  padding-right: 10px;
+  color: #FEB653;
+}
+
+footer .copyright  li:first-child:before {
+  display: none;
+}
+
 /*** About ***/
 
 .about .main-content {
