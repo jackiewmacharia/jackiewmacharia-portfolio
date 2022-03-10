@@ -1097,6 +1097,11 @@ footer .copyright  li:first-child:before {
   transition: .3s;
 }
 
+.contact .contactform .form-block {
+  justify-content: center;
+  align-items: center;
+}
+
 .contact .contactform .form-message {
   margin: 24px 0;
 }
@@ -1127,6 +1132,10 @@ footer .copyright  li:first-child:before {
   font-family: FontAwesome;
   content: "\f071";
   padding-right: 10px;
+}
+
+.contact .contactform .hidden-honeypot {
+  display: none !important;
 }
 
 /*** Blog ***/
