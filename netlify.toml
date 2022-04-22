@@ -5,6 +5,6 @@
     Content-Type = "application/font-woff"
 
 [[redirects]]
-  from = "https://wangoimacharia.netlify.com/*"
-  to = "https:/www.wangoimacharia.dev/:splat"
+  from = "https://jackiewmacharia.netlify.com/*"
+  to = "https:/www.jackiewmacharia.dev/:splat"
   force = true

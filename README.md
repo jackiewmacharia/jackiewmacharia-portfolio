@@ -1,1 +1,1 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/910385a0-88ec-4709-8a63-12d48ad16e20/deploy-status)](https://app.netlify.com/sites/wangoimacharia/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/910385a0-88ec-4709-8a63-12d48ad16e20/deploy-status)](https://app.netlify.com/sites/jackiewmacharia/deploys)
