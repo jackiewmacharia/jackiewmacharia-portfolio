@@ -440,7 +440,7 @@ body.light hr.separator {
     height: 50px;
   }
 
-  .header .icon-box i.fa {
+  .header .icon-box i.fa-solid {
     position: absolute;
     pointer-events: none;
   }
