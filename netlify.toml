@@ -3,8 +3,3 @@
   [headers.values]
     Access-Control-Allow-Origin = "*"
     Content-Type = "application/font-woff"
-
-[[redirects]]
-  from = "https://jackiewmacharia.netlify.com/*"
-  to = "https:/www.jackiewmacharia.dev/:splat"
-  force = true
