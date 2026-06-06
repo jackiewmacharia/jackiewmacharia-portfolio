@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const featured = allProjects.filter(p => p.data.featured);
+const others = allProjects.filter(p => !p.data.featured);
+
+---
+
+<BaseLayout
+  title="Projects | Jackie Macharia"
+  description="Engineering projects and work by Jackie Macharia."
+>
+  <main class="mx-auto max-w-5xl px-6 py-16" data-pagefind-body>
+    <header class="mb-16">
+      <p class="mb-3 text-sm font-mono text-primary">projects</p>
+      <h1 class="mb-4 text-4xl font-bold tracking-tight text-foreground">Projects</h1>
+      <p class="max-w-xl leading-relaxed text-muted-foreground">
+        A selection of projects I've built or contributed to.
+      </p>
+    </header>
+
+    {featured.length > 0 && (
+      <section class="mb-16">
+        <h2 class="mb-6 text-xs font-mono uppercase tracking-widest text-muted-foreground">Featured</h2>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {featured.map(project => (
+            <ProjectCard
+              title={project.data.title}
+              description={project.data.description}
+              stack={project.data.stack}
+              githubUrl={project.data.githubUrl}
+              liveUrl={project.data.liveUrl}
+              featured={true}
+            />
+          ))}
+        </div>
+      </section>
+    )}
+
+    {others.length > 0 && (
+      <section>
+        <h2 class="mb-6 text-xs font-mono uppercase tracking-widest text-muted-foreground">Other Projects</h2>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {others.map(project => (
+            <ProjectCard
+              title={project.data.title}
+              description={project.data.description}
+              stack={project.data.stack}
+              githubUrl={project.data.githubUrl}
+              liveUrl={project.data.liveUrl}
+            />
+          ))}
+        </div>
+      </section>
+    )}
+
+    {allProjects.length === 0 && (
+      <p class="text-sm font-mono text-muted-foreground">Projects coming soon...</p>
+    )}
+  </main>
+</BaseLayout>

@@ -1,0 +1,89 @@
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
+
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Theme variant — driven by [data-theme] attribute on <html> */
+@variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ── Semantic colour tokens ───────────────────────────────── */
+:root,
+[data-theme="light"] {
+  --background:          var(--color-stone-100);
+  --foreground:          var(--color-zinc-900);
+  --surface:             var(--color-stone-50);
+  --border:              var(--color-zinc-200);
+  --muted:               var(--color-stone-100);
+  --muted-foreground:    var(--color-zinc-500);
+  --primary:             var(--color-amber-600);
+  --primary-foreground:  white;
+  --primary-hover:       var(--color-amber-700);
+}
+
+[data-theme="dark"] {
+  --background:          var(--color-zinc-950);
+  --foreground:          var(--color-zinc-100);
+  --surface:             var(--color-zinc-900);
+  --border:              var(--color-zinc-800);
+  --muted:               var(--color-zinc-900);
+  --muted-foreground:    var(--color-zinc-400);
+  --primary:             var(--color-amber-400);
+  --primary-foreground:  var(--color-zinc-950);
+  --primary-hover:       var(--color-amber-300);
+}
+
+/* OS-level fallback when no data-theme is set */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) {
+    --background:          var(--color-zinc-950);
+    --foreground:          var(--color-zinc-100);
+    --surface:             var(--color-zinc-900);
+    --border:              var(--color-zinc-800);
+    --muted:               var(--color-zinc-900);
+    --muted-foreground:    var(--color-zinc-400);
+    --primary:             var(--color-amber-400);
+    --primary-foreground:  var(--color-zinc-950);
+    --primary-hover:       var(--color-amber-300);
+  }
+
+  html:not([data-theme="light"]):not([data-theme="dark"]) {
+    color-scheme: dark;
+  }
+}
+
+/* Map tokens to Tailwind utilities via @theme inline */
+@theme inline {
+  --color-background:         var(--background);
+  --color-foreground:         var(--foreground);
+  --color-surface:            var(--surface);
+  --color-border:             var(--border);
+  --color-muted:              var(--muted);
+  --color-muted-foreground:   var(--muted-foreground);
+  --color-primary:            var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover:      var(--primary-hover);
+}
+
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+}
+
+html {
+  color-scheme: light;
+  scroll-behavior: smooth;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+body {
+  transition: background-color 0.15s, color 0.15s;
+}
+
+/* Inline code */
+:not(pre) > code {
+  @apply rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-[0.875em] text-primary;
+}

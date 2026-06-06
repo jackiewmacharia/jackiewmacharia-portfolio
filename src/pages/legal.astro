@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Legal Notice | Jackie Macharia"
+  description="Legal notice for jackiewmacharia.dev"
+>
+  <main class="mx-auto max-w-2xl px-6 py-16">
+    <header class="mb-10">
+      <p class="mb-3 text-sm font-mono text-primary">legal</p>
+      <h1 class="text-4xl font-bold tracking-tight text-foreground">Legal Notice</h1>
+    </header>
+
+    <dl class="space-y-6 text-foreground">
+      <div>
+        <dt class="mb-1 text-xs font-mono uppercase tracking-widest text-muted-foreground">Contact</dt>
+        <dd>Jackie Macharia</dd>
+        <dd>Berlin, Germany</dd>
+        <dd>
+          <a
+            href="mailto:portfoliojwm@gmail.com"
+            class="text-primary hover:underline"
+          >
+            portfoliojwm@gmail.com
+          </a>
+        </dd>
+      </div>
+
+      <div>
+        <dt class="mb-1 text-xs font-mono uppercase tracking-widest text-muted-foreground">Responsible for content</dt>
+        <dd>Jackie Macharia</dd>
+      </div>
+    </dl>
+  </main>
+</BaseLayout>

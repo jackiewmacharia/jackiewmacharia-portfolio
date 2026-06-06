@@ -1,0 +1,93 @@
+---
+import ThemeToggle from './ThemeToggle';
+import { navLinkVariants } from '../lib/variants';
+import { getCollection } from 'astro:content';
+
+const [allPosts, allProjects] = await Promise.all([
+  getCollection('blog', ({ data }) => !data.draft),
+  getCollection('projects'),
+]);
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  ...(allProjects.length > 0 ? [{ href: '/projects', label: 'Projects' }] : []),
+  ...(allPosts.length > 0 ? [{ href: '/blog', label: 'Blog' }] : []),
+  { href: '/search', label: 'Search' },
+];
+
+const pathname = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? pathname === '/' : pathname.startsWith(href);
+---
+
+<header class="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur-sm">
+  <nav class="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
+    <a
+      href="/"
+      class="font-mono font-semibold text-foreground transition-colors hover:text-primary"
+    >
+      jackiewmacharia<span class="text-primary">.dev</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <ul class="hidden items-center gap-6 md:flex">
+      {navLinks.map(({ href, label }) => (
+        <li>
+          <a href={href} class={navLinkVariants({ active: isActive(href) })}>
+            {label}
+          </a>
+        </li>
+      ))}
+      <li>
+        <ThemeToggle client:load />
+      </li>
+    </ul>
+
+    <!-- Mobile: theme toggle + hamburger -->
+    <div class="flex items-center gap-3 md:hidden">
+      <ThemeToggle client:load />
+      <button
+        id="mobile-menu-toggle"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        class="p-1 text-muted-foreground transition-colors hover:text-foreground"
+      >
+        <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden border-t border-border bg-background md:hidden">
+    <ul class="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-4">
+      {navLinks.map(({ href, label }) => (
+        <li>
+          <a href={href} class={navLinkVariants({ active: isActive(href) })}>
+            {label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+
+  toggle?.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    menu?.classList.toggle('hidden');
+    iconOpen?.classList.toggle('hidden');
+    iconClose?.classList.toggle('hidden');
+  });
+</script>

@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Search | Jackie Macharia" description="Search jackiewmacharia.dev">
+  <Fragment slot="head">
+    <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  </Fragment>
+
+  <main class="mx-auto max-w-2xl px-6 py-16" data-pagefind-ignore>
+    <header class="mb-10">
+      <p class="mb-3 text-sm font-mono text-primary">search</p>
+      <h1 class="mb-4 text-4xl font-bold tracking-tight text-foreground">Search</h1>
+    </header>
+
+    <div id="search"></div>
+
+    <!-- Shown only when Pagefind hasn't been built yet -->
+    <div id="search-unavailable" class="hidden rounded-lg border border-border bg-surface px-5 py-4 text-sm font-mono text-muted-foreground">
+      <span class="select-none text-muted-foreground/60">~ $ </span>
+      <span class="text-primary">npm run build</span>
+      <br />
+      <span class="mt-2 block text-xs text-muted-foreground">
+        Search index is built at deploy time. Run <code class="text-primary">npm run build</code> locally to use search.
+      </span>
+    </div>
+  </main>
+</BaseLayout>
+
+<style is:global>
+  #search {
+    --pagefind-ui-primary: var(--primary);
+    --pagefind-ui-text: var(--foreground);
+    --pagefind-ui-background: var(--surface);
+    --pagefind-ui-border: var(--border);
+    --pagefind-ui-tag: var(--muted);
+    --pagefind-ui-border-radius: 6px;
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-font: inherit;
+  }
+
+  /* Match highlight colour to amber accent */
+  .pagefind-ui__result-title mark,
+  .pagefind-ui__result-excerpt mark {
+    background-color: var(--color-yellow-200);
+    color: var(--color-amber-900);
+    border-radius: 2px;
+    padding: 0 2px;
+  }
+
+  [data-theme="dark"] .pagefind-ui__result-title mark,
+  [data-theme="dark"] .pagefind-ui__result-excerpt mark {
+    background-color: var(--color-amber-800);
+    color: var(--color-amber-50);
+  }
+
+  /* Result link colour */
+  .pagefind-ui__result-link {
+    color: var(--primary) !important;
+  }
+
+  .pagefind-ui__result-link:hover {
+    color: var(--primary-hover) !important;
+    text-decoration: underline;
+  }
+</style>
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const script = document.createElement('script');
+    script.src = '/pagefind/pagefind-ui.js';
+    script.onload = () => {
+      // @ts-expect-error — PagefindUI is a global injected by the script above
+      new window.PagefindUI({
+        element: '#search',
+        showSubResults: true,
+        resetStyles: false,
+      });
+    };
+    script.onerror = () => {
+      document.getElementById('search-unavailable')?.classList.remove('hidden');
+    };
+    document.head.appendChild(script);
+  });
+</script>

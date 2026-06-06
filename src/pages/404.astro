@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { buttonVariants } from '../lib/variants';
+---
+
+<BaseLayout
+  title="404 — Not Found | Jackie Macharia"
+  description="This page doesn't exist."
+>
+  <main class="mx-auto flex min-h-[70vh] max-w-5xl items-center px-6 py-24">
+    <div class="max-w-lg">
+      <p class="mb-4 text-sm font-mono text-primary">error 404 - not found</p>
+      <h1 class="mb-6 text-8xl font-bold tracking-tight text-foreground tabular-nums">
+        404
+      </h1>
+      <p class="mb-10 text-lg leading-relaxed text-muted-foreground">
+        well, that's awkward.
+      </p>
+
+      <div class="mb-10 rounded-lg border border-border bg-surface px-5 py-4 text-sm font-mono text-muted-foreground">
+        <span class="select-none text-muted-foreground/60">~ $ </span>find . -name <span class="text-primary">"this-page"</span>
+        <br />
+        <span class="select-none text-muted-foreground/60">~ $ </span><span class="text-red-500">no results found</span>
+        <br />
+        <span class="select-none text-muted-foreground/60">~ $ </span><span class="inline-block h-4 w-2 animate-pulse bg-primary align-middle"></span>
+      </div>
+
+      <div class="flex flex-wrap gap-4">
+        <a href="/" class={buttonVariants({ variant: 'primary' })}>go home</a>
+        <a href="/blog" class={buttonVariants({ variant: 'ghost' })}>read the blog</a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
